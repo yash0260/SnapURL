@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {BarLoader} from "react-spinners";
 
+
 const RedirectLink = () => {
   const {id} = useParams();
 
@@ -20,15 +21,13 @@ const RedirectLink = () => {
   }, []);
 
   useEffect(() => {
-   if (!loading && data) {
-          fnStats();
-      
-          setTimeout(() => {
-            window.location.replace(data.original_url);
-          }, 100);
-        }
-      }, [loading, data]);
-  if (loading) {
+    if (!loading && data) {
+      fnStats();
+      window.location.href = data.original_url;
+    }
+  }, [loading, data]);
+
+  if (loading || loadingStats) {
     return (
       <>
         <BarLoader width={"100%"} color="#36d7b7" />
@@ -37,18 +36,9 @@ const RedirectLink = () => {
       </>
     );
   }
-if (data) {
-    return (
-      <div style={{textAlign: "center", marginTop: "50px", padding: "20px"}}>
-        <p>Redirecting to destination...</p>
-        <p style={{marginTop: "10px"}}>
-          If not redirected, <a href={data.original_url} style={{color: "#36d7b7"}}>click here</a>
-        </p>
-      </div>
-    );
-  }
 
   return null;
 };
+
 
 export default RedirectLink;
