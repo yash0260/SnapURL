@@ -5,7 +5,6 @@ import {useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {BarLoader} from "react-spinners";
 
-
 const RedirectLink = () => {
   const {id} = useParams();
 
@@ -23,9 +22,8 @@ const RedirectLink = () => {
   useEffect(() => {
     if (!loading && data) {
       fnStats();
-      window.location.href = data.original_url;
     }
-  }, [loading, data]);
+  }, [loading]);
 
   if (loading || loadingStats) {
     return (
@@ -39,6 +37,5 @@ const RedirectLink = () => {
 
   return null;
 };
-
 
 export default RedirectLink;
